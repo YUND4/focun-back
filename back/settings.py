@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'common',
     'health',
-    'users'
+    'users',
+    'jobs'
 ]
 
 MIDDLEWARE = [
