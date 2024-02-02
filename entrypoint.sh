@@ -5,10 +5,24 @@ while ! timeout 1 bash -c "echo > /dev/tcp/$POSTGRES_HOST/$POSTGRES_PORT"; do
   sleep 1
 done
 
-python manage.py migrate
+
+if [ "$RUNTIME_MODE" = "test" ]; then
+    clear
+    pytest --reuse-db
+    exit 0
+fi
 
 if [ "$RUNTIME_MODE" = "dev" ]; then
-  python manage.py runserver 0.0.0.0:8000
+  if [ "$SERVICE_TYPE" = "web" ]; then
+    python manage.py runserver 0.0.0.0:8000
+  elif [ "$SERVICE_TYPE" = "celery" ]; then
+    celery -A back worker --loglevel=debug
+  fi
 else
-  gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+  if [ "$SERVICE_TYPE" = "web" ]; then
+    python manage.py migrate
+    gunicorn back.wsgi:application --bind 0.0.0.0:8000
+  elif [ "$SERVICE_TYPE" = "celery" ]; then
+    celery -A back worker --loglevel=info
+  fi
 fi

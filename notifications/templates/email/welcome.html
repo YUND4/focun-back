@@ -1,0 +1,14 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Bienvenido" %}</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{% trans "Bienvenido/a" %}, {{ name }} {{ last_name }}</h1>
+        <p>{% trans "Estamos muy contentos de tenerte a bordo." %}</p>
+    </div>
+</body>
+</html>
