@@ -26,6 +26,8 @@ services:
       - ./.env
     environment:
       - SERVICE_TYPE=web
+      - TESTING=${TESTING}
+
   celery:
     build: .
     volumes:

@@ -42,6 +42,10 @@ pull: ## update Docker images without losing local databases
 bash: ## open bash into project directory
 	@docker exec -it focun-back-web-1 bash
 
+.PHONY: test
+test: ## start tests
+	@export TESTING=on && make up
+
 .PHONY: log
 log: ## get only log of the django project
 	@docker logs -f focun-back-web-1

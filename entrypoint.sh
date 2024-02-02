@@ -6,8 +6,7 @@ while ! timeout 1 bash -c "echo > /dev/tcp/$POSTGRES_HOST/$POSTGRES_PORT"; do
 done
 
 
-if [ "$RUNTIME_MODE" = "test" ]; then
-    clear
+if [ "$TESTING" = "on" ]; then
     pytest --reuse-db
     exit 0
 fi
