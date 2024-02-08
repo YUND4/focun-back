@@ -15,7 +15,7 @@ class AuthenticableSerializer(serializers.ModelSerializer):
         model = Authenticable
         fields = ['id', 'email']
 
-class UserSerializerSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(write_only=True)
     password = serializers.CharField(max_length=30, write_only=True)
     description = serializers.CharField(max_length=500, write_only=True)

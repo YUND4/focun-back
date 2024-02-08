@@ -1,6 +1,6 @@
 
 from rest_framework.routers import DefaultRouter
-from users.viewsets import UserViewSet
+from users.viewsets import UserMeViewSet, UserViewSet
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -9,6 +9,7 @@ from rest_framework_simplejwt.views import (
 )
 
 router = DefaultRouter()
+router.register(r'me', UserMeViewSet)
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
